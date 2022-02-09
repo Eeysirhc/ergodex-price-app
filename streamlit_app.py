@@ -1,3 +1,9 @@
+##############################
+# Author: eeysirhc
+# Date written: 2022-02-09
+# Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
+##############################
+
 import streamlit as st
 import pandas as pd
 import altair as alt 
@@ -43,7 +49,6 @@ st.write(
 * Flip y-axis for certain pairs (ex: erg/ergopad where "down" is actually good)
 * Add more stuff (lol)
 """)
-
 
 
 
