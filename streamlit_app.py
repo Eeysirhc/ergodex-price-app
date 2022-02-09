@@ -32,3 +32,18 @@ chart = (line + points).interactive()
 
 st.altair_chart(chart, use_container_width=True)
 
+
+
+st.write(
+"""
+## To-Do
+* Automate datastream
+* Clean up ticker selector
+* Imrpove UI
+* Flip y-axis for certain pairs (ex: erg/ergopad where "down" is actually good)
+* Add more stuff (lol)
+""")
+
+
+
+
