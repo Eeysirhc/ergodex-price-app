@@ -47,8 +47,8 @@ price_pair = round(price_pair, 5)
 
 # PLOT CONFIG
 base = alt.Chart(token_final).encode(
-	x='global_index',
-	y='price',
+	alt.X('global_index', axis=alt.Axis(title='Global Index')),
+	alt.Y('price', axis=alt.Axis(title='Price')),
 	tooltip=['global_index', 'price'])
 
 line = base.mark_line()
