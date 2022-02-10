@@ -22,9 +22,13 @@ FROM pools p
 LEFT JOIN assets a_x ON a_x.id = p.x_id
 LEFT JOIN assets a_y ON a_y.id = p.y_id
 
+WHERE gindex not in (12981672,12979979) -- erg/sigusd: remove bug data
+
 ORDER BY gindex ASC
 ) to 'price-data.csv' with csv header
 
 ;
+
+
 
 
