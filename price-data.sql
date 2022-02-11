@@ -1,11 +1,11 @@
 /***************************
 Author: eeysirhc
 Date written: 2022-02-09
+Last updated: 2022-02-11
 Objective: pull all liquidity pair pricing over time
 ***************************/
 
-
-\copy (
+CREATE VIEW price_data AS 
 SELECT
 pool_id,
 a_x.ticker as x_ticker,
@@ -24,6 +24,6 @@ LEFT JOIN assets a_y ON a_y.id = p.y_id
 /* erg/sigusd: remove bug data */
 WHERE gindex not in (12981672,12979979) 
 
-ORDER BY gindex ASC) to 'price-data.csv' with csv header
-
 ;
+
+
