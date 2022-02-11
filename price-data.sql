@@ -5,8 +5,7 @@ Objective: pull all liquidity pair pricing over time
 ***************************/
 
 
-\copy 
-(
+\copy (
 SELECT
 pool_id,
 a_x.ticker as x_ticker,
@@ -25,10 +24,6 @@ LEFT JOIN assets a_y ON a_y.id = p.y_id
 /* erg/sigusd: remove bug data */
 WHERE gindex not in (12981672,12979979) 
 
-ORDER BY gindex ASC
-) to 'price-data.csv' with csv header
+ORDER BY gindex ASC) to 'price-data.csv' with csv header
 
 ;
-
-
-
