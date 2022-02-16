@@ -1,7 +1,7 @@
 /***************************
 Author: eeysirhc
 Date written: 2022-02-09
-Last updated: 2022-02-11
+Last updated: 2022-02-15
 Objective: pull all liquidity pair pricing over time
 ***************************/
 
@@ -15,6 +15,8 @@ y_amount/POWER(10,a_y.decimals) as y_amount,
 (x_amount/POWER(10,a_x.decimals))*(y_amount/POWER(10,a_y.decimals)) as k,
 (y_amount/POWER(10,a_y.decimals))/(x_amount/POWER(10,a_x.decimals)) as price,
 a_x.ticker || '/' || a_y.ticker as ticker,
+(y_amount/POWER(10,a_y.decimals))/(x_amount/POWER(10,a_x.decimals)) as yx_price,
+(x_amount/POWER(10,a_x.decimals))/(y_amount/POWER(10,a_y.decimals)) as xy_price,
 gindex as global_index
 
 FROM pools p
@@ -25,5 +27,3 @@ LEFT JOIN assets a_y ON a_y.id = p.y_id
 WHERE gindex not in (12981672,12979979) 
 
 ;
-
-
