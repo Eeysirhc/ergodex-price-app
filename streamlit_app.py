@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-02-10
+# Last updated: 2022-02-15
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -17,36 +17,32 @@ st.write(
 
 # LOAD DATA
 token_prices = pd.read_csv("price-data.csv")
+token_prices = token_prices[['global_index', 'yx_ticker', 'yx_price', 'xy_ticker', 'xy_price']]
 
-## REMOVE NULLS
-token_prices = token_prices[token_prices['ticker'].notnull()]
+# RESHAPE DATA
+token_prices_yx = token_prices[['global_index', 'yx_ticker', 'yx_price']]
+token_prices_yx = token_prices_yx.rename(columns={'yx_ticker': 'ticker', 'yx_price': 'price'})
+token_prices_xy = token_prices[['global_index', 'xy_ticker', 'xy_price']]
+token_prices_xy = token_prices_xy.rename(columns={'xy_ticker': 'ticker', 'xy_price': 'price'})
+
+token_final = pd.concat([token_prices_yx, token_prices_xy], axis=0)
+
 
 ## CREATE LIST OF TICKER SELECTION
-y_ticker = token_prices.y_ticker.unique()
-x_ticker = token_prices.x_ticker.unique()
+ticker_selector = token_final[token_final['ticker'].notnull()]
+ticker_selector = ticker_selector.ticker.unique()
 
-col1, col2 = st.columns(2)
+user_selection = st.selectbox("", ticker_selector)
 
-# TICKER SELECTOR BUTTONS
-## PAIR 1
-y_value = col1.radio("Pair 1", y_ticker)
-
-## PAIR 2
-x_value = col2.radio("Pair 2", x_ticker)
-
-
-# COMPUTE PRICING DATA
-token_final = token_prices[token_prices['y_ticker'] == y_value]
-token_final = token_final[token_final['x_ticker'] == x_value]
-token_final['price'] = token_final['y_amount'] / token_final['x_amount']
 
 ## GRAB MOST RECENT PRICE POINT
-price_pair = token_final['price'].iloc[-1]
+token_selection = token_final[token_final['ticker'] == user_selection]
+price_pair = token_selection['price'].iloc[-1]
 price_pair = round(price_pair, 5)
 
 
 # PLOT CONFIG
-base = alt.Chart(token_final).encode(
+base = alt.Chart(token_selection).encode(
 	alt.X('global_index', axis=alt.Axis(title='Global Index')),
 	alt.Y('price', axis=alt.Axis(title='Price')),
 	tooltip=['global_index', 'price'])
@@ -56,7 +52,7 @@ points = base.mark_point(filled=True, size=40)
 chart = (line + points).interactive()
 
 ## PRICE
-st.write('### ', y_value, '/', x_value,  'Price: ', price_pair)
+st.write('### ', user_selection, 'Price: ', price_pair)
 
 ## FINAL GRAPH
 st.altair_chart(chart, use_container_width=True)
@@ -68,7 +64,6 @@ st.write(
 """
 ## To-Do
 * Automate datastream
-* Error handling for invalid token pairs
 * Toggle to flip y-axis for certain pairs
 """)
 
