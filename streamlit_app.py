@@ -52,7 +52,7 @@ points = base.mark_point(filled=True, size=40)
 chart = (line + points).interactive()
 
 ## PRICE
-st.write('### ', user_selection, 'Price: ', price_pair)
+st.write('### Price: ', price_pair)
 
 ## FINAL GRAPH
 st.altair_chart(chart, use_container_width=True)
