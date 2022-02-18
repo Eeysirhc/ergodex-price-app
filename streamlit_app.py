@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-02-15
+# Last updated: 2022-02-18
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -17,15 +17,16 @@ st.write(
 
 # LOAD DATA
 token_prices = pd.read_csv("price-data.csv")
-token_prices = token_prices[['global_index', 'yx_ticker', 'yx_price', 'xy_ticker', 'xy_price']]
+token_prices = token_prices[['timestamp', 'yx_ticker', 'yx_price', 'xy_ticker', 'xy_price']]
 
 # RESHAPE DATA
-token_prices_yx = token_prices[['global_index', 'yx_ticker', 'yx_price']]
+token_prices_yx = token_prices[['timestamp', 'yx_ticker', 'yx_price']]
 token_prices_yx = token_prices_yx.rename(columns={'yx_ticker': 'ticker', 'yx_price': 'price'})
-token_prices_xy = token_prices[['global_index', 'xy_ticker', 'xy_price']]
+token_prices_xy = token_prices[['timestamp', 'xy_ticker', 'xy_price']]
 token_prices_xy = token_prices_xy.rename(columns={'xy_ticker': 'ticker', 'xy_price': 'price'})
 
 token_final = pd.concat([token_prices_yx, token_prices_xy], axis=0)
+token_final['timestamp'] = pd.to_datetime(token_final['timestamp'])
 
 
 ## CREATE LIST OF TICKER SELECTION
@@ -43,9 +44,9 @@ price_pair = round(price_pair, 5)
 
 # PLOT CONFIG
 base = alt.Chart(token_selection).encode(
-	alt.X('global_index', axis=alt.Axis(title='Global Index')),
+	alt.X('timestamp', axis=alt.Axis(title='Date')),
 	alt.Y('price', axis=alt.Axis(title='Price')),
-	tooltip=['global_index', 'price'])
+	tooltip=['timestamp', 'price'])
 
 line = base.mark_line()
 points = base.mark_point(filled=True, size=40)
@@ -56,7 +57,6 @@ st.write('### Price: ', price_pair)
 
 ## FINAL GRAPH
 st.altair_chart(chart, use_container_width=True)
-
 
 
 
