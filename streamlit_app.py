@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-02-18
+# Last updated: 2022-02-21
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -30,7 +30,8 @@ token_final['timestamp'] = pd.to_datetime(token_final['timestamp'])
 
 
 ## CREATE LIST OF TICKER SELECTION
-ticker_selector = token_final[token_final['ticker'].notnull()]
+ticker_selector = token_final.sort_values(by='ticker')
+ticker_selector = ticker_selector[ticker_selector['ticker'].notnull()]
 ticker_selector = ticker_selector.ticker.unique()
 
 user_selection = st.selectbox("", ticker_selector)
@@ -66,4 +67,3 @@ st.write(
 * Automate datastream
 * Toggle to flip y-axis for certain pairs
 """)
-
