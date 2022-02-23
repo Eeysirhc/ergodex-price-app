@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-02-21
+# Last updated: 2022-02-23
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -36,9 +36,9 @@ ticker_selector = ticker_selector.ticker.unique()
 
 user_selection = st.selectbox("", ticker_selector)
 
-
 ## GRAB MOST RECENT PRICE POINT
 token_selection = token_final[token_final['ticker'] == user_selection]
+token_selection = token_selection.sort_values('timestamp', ascending=True)
 price_pair = token_selection['price'].iloc[-1]
 price_pair = round(price_pair, 5)
 
