@@ -11,7 +11,7 @@ Pull the repo and follow the instructions [here](https://github.com/bazuaal/ergo
 
 ### Create summary view
 
-Run the `price-data.sql` file which summarizes all the different tables into a single view.
+Login to your newly created databse and run the `price-data.sql` file which summarizes all the different tables into a single consolidated view.
 
 ### Run ETL pipeline
 
