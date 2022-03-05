@@ -19,6 +19,11 @@ Assuming you left everything as default you can then execute the following comma
 
 `PGPASSWORD=ergodex psql -h localhost -p 5432 -d ergodex -U ergodex -f etl-price-data.sql`
 
+The above accesses your database, retrieves the table data, then dumps a CSV file into your working directory.
 
-<br>
+### Launch app
+
+Finally, make sure you have [Streamlit](https://streamlit.io/) installed then run:
+
+`streamlit run streamlit_app.py`
 
