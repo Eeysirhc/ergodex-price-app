@@ -64,10 +64,10 @@ st.altair_chart(chart, use_container_width=True)
 st.write(
 """
 ## To-Do
-* Automate datastream
 * Toggle to flip y-axis for certain pairs
 * [ERGO Seed Phrase #8](https://www.reddit.com/r/ergonauts/comments/t2n8yj/the_15_days_of_ergo_seed_phrases/): "Don't _____ Be Happy"
 """)
+
 
 
 
