@@ -50,7 +50,7 @@ base = alt.Chart(token_selection).encode(
 	tooltip=['timestamp', 'price'])
 
 line = base.mark_line()
-points = base.mark_point(filled=True, size=20)
+points = base.mark_point(filled=True, size=10)
 chart = (line + points).interactive()
 
 ## PRICE
