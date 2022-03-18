@@ -1,7 +1,7 @@
 /***************************
 Author: eeysirhc
 Date written: 2022-02-09
-Last updated: 2022-03-17
+Last updated: 2022-03-18
 Objective: pull all liquidity pair pricing over time
 ***************************/
 
@@ -43,7 +43,12 @@ LEFT JOIN assets a_x ON a_x.id = dp.x_id
 LEFT JOIN assets a_y ON a_y.id = dp.y_id
 
 /* erg/sigusd: remove bug data */
-WHERE gindex not in (12981672,12979979) 
+WHERE gindex NOT IN (12981672,12979979) 
+
+/* remove outdated tickers */
+AND a_x.ticker NOT IN ('WT_ERG', 'WT_ADA', 'xyzpad')
+AND a_y.ticker NOT IN ('WT_ERG', 'WT_ADA', 'xyzpad')
 
 
 ;
+
