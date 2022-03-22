@@ -1,11 +1,11 @@
 /***************************
 Author: eeysirhc
 Date written: 2022-02-09
-Last updated: 2022-03-18
+Last updated: 2022-03-22
 Objective: pull all liquidity pair pricing over time
 ***************************/
 
-CREATE VIEW price_data AS 
+CREATE OR REPLACE VIEW price_data AS 
 
 with data_pools as 
 (select pool_state_id, pool_id, x_id, x_amount, y_id, y_amount, gindex 
@@ -46,8 +46,8 @@ LEFT JOIN assets a_y ON a_y.id = dp.y_id
 WHERE gindex NOT IN (12981672,12979979) 
 
 /* remove outdated tickers */
-AND a_x.ticker NOT IN ('WT_ERG', 'WT_ADA', 'xyzpad')
-AND a_y.ticker NOT IN ('WT_ERG', 'WT_ADA', 'xyzpad')
+AND a_x.ticker NOT IN ('xyzpad')
+AND a_y.ticker NOT IN ('xyzpad')
 
 
 ;
