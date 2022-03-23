@@ -65,7 +65,7 @@ line_chart = (line + points).interactive()
 
 ## CANDLESTICK CHART
 base = alt.Chart(token_selection_candlestick).encode(
-    alt.X('timestamp', axis=alt.Axis(title='timestamp')),
+    alt.X('timestamp', axis=alt.Axis(title='Date')),
     color=alt.condition("datum.open <= datum.close",
                         alt.value("#06982d"), alt.value("#ae1325"))
 )
