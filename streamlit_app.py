@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-02-23
+# Last updated: 2022-03-22
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -28,22 +28,32 @@ token_prices_xy = token_prices_xy.rename(columns={'xy_ticker': 'ticker', 'xy_pri
 token_final = pd.concat([token_prices_yx, token_prices_xy], axis=0)
 token_final['timestamp'] = pd.to_datetime(token_final['timestamp'])
 
+## SHAPE DATA FOR CANDLESTICK CHARTS
+token_candlestick = token_final.groupby(['ticker', pd.Grouper(key='timestamp', freq='240min')])\
+         .agg(open=pd.NamedAgg(column='price', aggfunc='first'), 
+              close=pd.NamedAgg(column='price', aggfunc='last'), 
+              high=pd.NamedAgg(column='price', aggfunc='max'), 
+              low=pd.NamedAgg(column='price', aggfunc='min'))\
+         .reset_index()
 
 ## CREATE LIST OF TICKER SELECTION
 ticker_selector = token_final.sort_values(by='ticker')
 ticker_selector = ticker_selector[ticker_selector['ticker'].notnull()]
 ticker_selector = ticker_selector.ticker.unique()
 
+## CUSTOMER VARIABLES
 user_selection = st.selectbox("", ticker_selector)
 
+token_selection = token_final[token_final['ticker'] == user_selection].sort_values('timestamp', ascending=True)
+token_selection_candlestick = token_candlestick[token_candlestick['ticker'] == user_selection].sort_values('timestamp', ascending=True)
+
 ## GRAB MOST RECENT PRICE POINT
-token_selection = token_final[token_final['ticker'] == user_selection]
-token_selection = token_selection.sort_values('timestamp', ascending=True)
 price_pair = token_selection['price'].iloc[-1]
 price_pair = round(price_pair, 5)
 
 
 # PLOT CONFIG
+## LINE CHART
 base = alt.Chart(token_selection).encode(
 	alt.X('timestamp', axis=alt.Axis(title='Date')),
 	alt.Y('price', axis=alt.Axis(title='Price')),
@@ -51,13 +61,32 @@ base = alt.Chart(token_selection).encode(
 
 line = base.mark_line()
 points = base.mark_point(filled=True, size=10)
-chart = (line + points).interactive()
+line_chart = (line + points).interactive()
+
+## CANDLESTICK CHART
+base = alt.Chart(token_selection_candlestick).encode(
+    alt.X('timestamp', axis=alt.Axis(title='timestamp')),
+    color=alt.condition("datum.open <= datum.close",
+                        alt.value("#06982d"), alt.value("#ae1325"))
+)
+
+candlestick_chart = alt.layer(
+    base.mark_rule().encode(alt.Y('low', title='Price',
+                                    scale=alt.Scale(zero=False)), alt.Y2('high')),
+    base.mark_bar().encode(alt.Y('open'), alt.Y2('close')),
+).interactive()
+
+
+
+
 
 ## PRICE
 st.write('### Price: ', price_pair)
 
-## FINAL GRAPH
-st.altair_chart(chart, use_container_width=True)
+## FINAL
+st.altair_chart(line_chart, use_container_width=True)
+st.write('4hr Candles')
+st.altair_chart(candlestick_chart, use_container_width=True)
 
 
 
@@ -67,6 +96,7 @@ st.write(
 * Toggle to flip y-axis for certain pairs
 * [ERGO Seed Phrase #8](https://www.reddit.com/r/ergonauts/comments/t2n8yj/the_15_days_of_ergo_seed_phrases/): "Don't _____ Be Happy"
 """)
+
 
 
 
