@@ -8,22 +8,17 @@ This is a simple token price charting app which relies on extracting liquidity p
 
 Pull the repo and follow the instructions [here](https://github.com/bazuaal/ergodex-stats) on how to setup the docker containers to store the ErgoDEX statistics into a local PostgreSQL database.
 
+### Execute automation job
 
-### Create summary view
+The following command will fire off the entire pipeline job for users on...
 
-Login to your newly created databse and run the `price-data.sql` file which summarizes all the different tables into a single consolidated view.
+Mac:
 
-### Run ETL pipeline
+`python3 run_updater.py`
 
-Assuming you left everything as default you can then execute the following command in your terminal:
+PC:
 
-`PGPASSWORD=ergodex psql -h localhost -p 5432 -d ergodex -U ergodex -f etl-price-data.sql`
+`placeholder`
 
-The above accesses your database, retrieves the table data, then dumps a CSV file into your working directory.
-
-### Launch app
-
-Finally, make sure you have [Streamlit](https://streamlit.io/) installed then run:
-
-`streamlit run streamlit_app.py`
+This along with the docker container will need to remain active for this app to work.
 
