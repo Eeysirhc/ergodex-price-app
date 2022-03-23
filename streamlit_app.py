@@ -92,11 +92,11 @@ st.altair_chart(candlestick_chart, use_container_width=True)
 
 st.write(
 """
-## To-Do
+## Backlog
+* [Like what you see? :)](https://explorer.ergoplatform.com/payment-request?address=9fGGAv2h8PJe4tbTUy5LD6FHS64i367Ctkm9ZPFfcZUB9mrFz3x&amount=0&description=)
 * Toggle to flip y-axis for certain pairs
 * [ERGO Seed Phrase #8](https://www.reddit.com/r/ergonauts/comments/t2n8yj/the_15_days_of_ergo_seed_phrases/): "Don't _____ Be Happy"
 """)
-
 
 
 
