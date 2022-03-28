@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-03-22
+# Last updated: 2022-03-28
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -14,6 +14,8 @@ st.write(
 """
 # ErgoDEX: token prices
 """)
+
+st.write("[Leaderboard](https://share.streamlit.io/eeysirhc/ergo-tokens-board/main/app.py)")
 
 # LOAD DATA
 token_prices = pd.read_csv("price-data.csv")
@@ -97,8 +99,6 @@ st.write(
 * Toggle to flip y-axis for certain pairs
 * [ERGO Seed Phrase #8](https://www.reddit.com/r/ergonauts/comments/t2n8yj/the_15_days_of_ergo_seed_phrases/): "Don't _____ Be Happy"
 """)
-
-
 
 
 
