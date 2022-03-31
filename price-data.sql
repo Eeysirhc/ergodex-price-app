@@ -1,11 +1,13 @@
 /***************************
 Author: eeysirhc
 Date written: 2022-02-09
-Last updated: 2022-03-22
+Last updated: 2022-03-31
 Objective: pull all liquidity pair pricing over time
 ***************************/
 
-CREATE OR REPLACE VIEW price_data AS 
+DROP VIEW IF EXISTS price_data ; 
+
+CREATE VIEW price_data AS 
 
 with data_pools as 
 (select pool_state_id, pool_id, x_id, x_amount, y_id, y_amount, gindex 
@@ -21,7 +23,8 @@ union all
 select pool_id, pool_state_id, p2pk, to_timestamp(timestamp/1000) as timestamp, 'swap' as segment 
 from swaps)
 
-select dp.pool_state_id, 
+select 
+--dp.pool_state_id, 
 dp.pool_id, 
 dp.x_id, 
 a_x.ticker as x_ticker, 
@@ -35,8 +38,8 @@ a_x.ticker || '/' || a_y.ticker as xy_ticker,
 (dp.x_amount/POWER(10,a_x.decimals))/(dp.y_amount/POWER(10,a_y.decimals)) as xy_price,
 dp.gindex, 
 dt.timestamp,
-dt.segment,
-dt.p2pk as address 
+dt.segment
+--dt.p2pk as address 
 from data_pools dp 
 join data_time dt on dt.pool_id = dp.pool_id and dt.pool_state_id = dp.pool_state_id 
 LEFT JOIN assets a_x ON a_x.id = dp.x_id
@@ -49,6 +52,8 @@ WHERE gindex NOT IN (12981672,12979979)
 AND a_x.ticker NOT IN ('xyzpad')
 AND a_y.ticker NOT IN ('xyzpad')
 
+ORDER BY dt.timestamp
 
 ;
+
 
