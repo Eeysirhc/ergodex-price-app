@@ -11,4 +11,3 @@ PGPASSWORD=ergodex psql -h localhost -p 5432 -d ergodex -U ergodex -f etl-price-
 
 ;
 
-

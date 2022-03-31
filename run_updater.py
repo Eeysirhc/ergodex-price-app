@@ -21,6 +21,7 @@ while True:
 			print("Current branch \"" + branch + "\" does not match output branch \"" + repo_branch + "\" in this file")
 			print("Program will now terminate")
 			break
+		#subprocess.run(["rm", "price-data.csv"]) # testing process line
 		subprocess.run("get-price-csv_windows.cmd") if os.name == 'nt' else subprocess.run(os.getcwd() + "/get-price-csv.sh")
 		print("Price data retrieved")
 		data_get = True
