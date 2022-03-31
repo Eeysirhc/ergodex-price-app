@@ -5,7 +5,7 @@ import time
 import os
 from datetime import datetime, timezone
 
-updatePeriod = 300 # Updates once every ~5 minutes (excluding time it takes to get data from PSQL server, pushing to Github)
+updatePeriod = 3600 # Updates once every ~5 minutes (excluding time it takes to get data from PSQL server, pushing to Github)
 repo_branch = "main" # The branch to push the data changes to
 
 while True:
