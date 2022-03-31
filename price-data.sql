@@ -38,7 +38,7 @@ a_x.ticker || '/' || a_y.ticker as xy_ticker,
 (dp.x_amount/POWER(10,a_x.decimals))/(dp.y_amount/POWER(10,a_y.decimals)) as xy_price,
 dp.gindex, 
 dt.timestamp,
-dt.segment
+dt.segment 
 --dt.p2pk as address 
 from data_pools dp 
 join data_time dt on dt.pool_id = dp.pool_id and dt.pool_state_id = dp.pool_state_id 
