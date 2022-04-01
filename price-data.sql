@@ -1,7 +1,7 @@
 /***************************
 Author: eeysirhc
 Date written: 2022-02-09
-Last updated: 2022-03-31
+Last updated: 2022-04-01
 Objective: pull all liquidity pair pricing over time
 ***************************/
 
