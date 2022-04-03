@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-03-28
+# Last updated: 2022-04-03
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -9,6 +9,16 @@ import streamlit as st
 import pandas as pd
 import altair as alt 
 
+st.write(
+"""
+### Developer update
+*April 3rd, 2022*   
+My personal computer took a massive dump on itself which means I am unable to update or load ErgoDEX market price data. 
+Currently saving for new hardware but if you really enjoyed this app please consider donating to my [cryptojar](https://explorer.ergoplatform.com/en/addresses/9fGGAv2h8PJe4tbTUy5LD6FHS64i367Ctkm9ZPFfcZUB9mrFz3x) to help fast-track this funding.  
+  
+Apologies for the inconvenience!
+"""
+)
 
 st.write(
 """

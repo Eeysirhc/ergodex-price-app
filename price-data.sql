@@ -52,7 +52,7 @@ WHERE gindex NOT IN (12981672,12979979)
 AND a_x.ticker NOT IN ('xyzpad')
 AND a_y.ticker NOT IN ('xyzpad')
 
-ORDER BY dt.timestamp
+
 
 ;
 
