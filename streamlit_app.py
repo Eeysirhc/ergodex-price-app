@@ -11,7 +11,7 @@ import altair as alt
 
 st.write(
 """
-### Please see footer notes for latest app updates
+## See footer for latest dev & app status
 """
 )
 
@@ -110,7 +110,7 @@ st.write(
 st.write(
 """
 ## Developer update
-*April 27th, 2022*
+*April 27th, 2022*   
 New computer purchased and setting up development environment - should be back up and running shortly!
 
 *April 3rd, 2022*   
