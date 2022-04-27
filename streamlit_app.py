@@ -11,7 +11,7 @@ import altair as alt
 
 st.write(
 """
-## See footer for latest dev & app status
+## See [dev updates](https://share.streamlit.io/eeysirhc/ergodex-price-app/main#developer-update) for status
 """
 )
 
