@@ -1,7 +1,7 @@
 ##############################
 # Author: eeysirhc
 # Date written: 2022-02-09
-# Last updated: 2022-04-03
+# Last updated: 2022-04-27
 # Objective: bare bones streamlit app to visualize ErgoDEX liquidity pair prices
 ##############################
 
@@ -11,12 +11,7 @@ import altair as alt
 
 st.write(
 """
-### Developer update
-*April 3rd, 2022*   
-My personal computer took a massive dump on itself which means I am unable to update this app for the time being.
-Currently saving for new hardware but if you really enjoyed this service please consider donating to my [cryptojar](https://explorer.ergoplatform.com/en/addresses/9fGGAv2h8PJe4tbTUy5LD6FHS64i367Ctkm9ZPFfcZUB9mrFz3x) to help fast-track this funding.  
-  
-Apologies for the inconvenience!
+### Please see footer notes for latest app updates
 """
 )
 
@@ -110,5 +105,20 @@ st.write(
 * [ERGO Seed Phrase #8](https://www.reddit.com/r/ergonauts/comments/t2n8yj/the_15_days_of_ergo_seed_phrases/): "Don't _____ Be Happy"
 """)
 
+
+
+st.write(
+"""
+## Developer update
+*April 27th, 2022*
+New computer purchased and setting up development environment - should be back up and running shortly!
+
+*April 3rd, 2022*   
+My personal computer took a massive dump on itself which means I am unable to update this app for the time being.
+Currently saving for new hardware but if you really enjoyed this service please consider donating to my [cryptojar](https://explorer.ergoplatform.com/en/addresses/9fGGAv2h8PJe4tbTUy5LD6FHS64i367Ctkm9ZPFfcZUB9mrFz3x) to help fast-track this funding.  
+  
+Apologies for the inconvenience!
+"""
+)
 
 
